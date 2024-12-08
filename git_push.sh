@@ -4,16 +4,9 @@
 echo "Enter commit message:"
 read commit_message
 
-# Stage all changes
 git add .
-
-# Pull the latest changes
 git pull
-
-# Commit with the user-provided message
 git commit -m "$commit_message"
-
-# Ask for the GitHub username
 echo "Enter your GitHub username:"
 read username
 
@@ -26,4 +19,18 @@ REMOTE_URL="https://$username:$token@github.com/paulsonashisherrala/C-Programmin
 
 # Push the changes using the constructed remote URL
 git push $REMOTE_URL
+
+# Check if the push was successful
+if [ $? -eq 0 ]; then
+    # Display an animated "Done!" message
+    echo -n "Pushing your changes"
+    for i in {1..3}
+    do
+        echo -n "."
+        sleep 0.5  # Wait for half a second
+    done
+    echo -e "\n🎉✨ DONE! Your changes have been pushed successfully! 🚀🎉"
+else
+    echo "Error during push!"  # Error message in case of failure
+fi
 
